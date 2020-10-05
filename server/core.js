@@ -1,5 +1,5 @@
 
-var server = require("./libs/server");
-var color = require("./libs/color");
+import Server from './libs/server';
 
-server.init(3000, "Pokemon");
+const coreServer = new Server({});
+coreServer.startListening();
