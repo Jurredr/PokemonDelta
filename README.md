@@ -1,2 +1,5 @@
 # PokemonDelta
-Pokémon Delta is a NodeJS Pokémon browser-game.
+Pokémon Delta is a Pokémon browser-game project.
+
+Primary language: JavaScript
+Server-side backend: NodeJS
