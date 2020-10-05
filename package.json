@@ -4,11 +4,19 @@
   "version": "1.0.0",
   "scripts": {
     "public:serve": "parcel public/index.html --out-dir dist/public",
-    "public:watch": "parcel watch public/index.html --out-dir dist/public"
+    "public:watch": "parcel watch public/index.html --out-dir dist/public",
+    "public:build": "parcel build public/index.html --out-dir dist/public",
+    "server:start": "babel-node server/index.js"
   },
   "author": "",
   "license": "MIT",
   "devDependencies": {
+    "@babel/core": "^7.11.6",
+    "@babel/node": "^7.10.5",
+    "@babel/preset-env": "^7.11.5",
     "parcel-bundler": "^1.12.4"
+  },
+  "dependencies": {
+    "express": "^4.17.1"
   }
 }
