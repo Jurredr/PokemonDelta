@@ -3,7 +3,7 @@ var PVersion = "1.0";
 var objects = [];
 
 
-var Screen = {
+var GraphicsScreen = {
   canvas: undefined,
   color: {
     r: 0,
@@ -11,17 +11,17 @@ var Screen = {
     b: 0
   },
   init: function() {
-    Screen.canvas = createCanvas(200, 200);
+    GraphicsScreen.canvas = createCanvas(200, 200);
     pixelDensity(1);
-    window.onresize = Screen.resize;
-    Screen.resize();
+    window.onresize = GraphicsScreen.resize;
+    GraphicsScreen.resize();
   },
   resize: function() {
-    Screen.canvas.size(window.innerWidth, window.innerHeight);
-    Screen.canvas.position(0, 0);
+    GraphicsScreen.canvas.size(window.innerWidth, window.innerHeight);
+    GraphicsScreen.canvas.position(0, 0);
   },
   beginStep: function() {
-    background(Screen.color.r, Screen.color.g, Screen.color.b, 255);
+    background(GraphicsScreen.color.r, GraphicsScreen.color.g, GraphicsScreen.color.b, 255);
   }
 }
 
@@ -46,7 +46,7 @@ function stepProperties() {
   }
 }
 function draw() {
-  Screen.beginStep();
+  GraphicsScreen.beginStep();
   step();
   stepProperties();
   drawProperties();

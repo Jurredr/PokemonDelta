@@ -2,7 +2,7 @@
 client.init("localhost:3000");
 
 function setup() {
-  Screen.init();
+  GraphicsScreen.init();
 
   new rawImage("boy_run");
 
