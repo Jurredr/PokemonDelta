@@ -1,10 +1,14 @@
 {
-    "name": "pokemon_delta",
-    "description": "",
-    "version": "1.0.0",
-    "scripts": {
-      "test": "echo \"Error: no test specified\" && exit 1"
-    },
-    "author": "",
-    "license": "MIT"
+  "name": "pokemon_delta",
+  "description": "",
+  "version": "1.0.0",
+  "scripts": {
+    "public:serve": "parcel public/index.html --out-dir dist/public",
+    "public:watch": "parcel watch public/index.html --out-dir dist/public"
+  },
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "parcel-bundler": "^1.12.4"
   }
+}
