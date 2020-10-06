@@ -1,22 +1,28 @@
 {
-  "name": "pokemon_delta",
-  "description": "",
-  "version": "1.0.0",
-  "repository": "https://github.com/Jurredr/PokemonDelta.git",
-  "scripts": {
-    "public:serve": "parcel public/index.html --out-dir dist/public",
-    "public:watch": "parcel watch public/index.html --out-dir dist/public",
-    "public:build": "parcel build public/index.html --out-dir dist/public",
-    "server:start": "babel-node server/index.js"
-  },
-  "license": "MIT",
-  "devDependencies": {
-    "@babel/core": "^7.11.6",
-    "@babel/node": "^7.10.5",
-    "@babel/preset-env": "^7.11.5",
-    "parcel-bundler": "^1.12.4"
-  },
-  "dependencies": {
-    "express": "^4.17.1"
-  }
+    "name": "pokemon_delta",
+    "description": "",
+    "version": "1.0.0",
+    "repository": "https://github.com/Jurredr/PokemonDelta.git",
+    "scripts": {
+        "lint": "eslint --ignore-path .gitignore .",
+        "lint-fix": "eslint --ignore-path .gitignore --ignore-path .eslintignore . --fix",
+        "public:serve": "parcel public/index.html --out-dir dist/public",
+        "public:watch": "parcel watch public/index.html --out-dir dist/public",
+        "public:build": "parcel build public/index.html --out-dir dist/public",
+        "server:start": "babel-node server/index.js"
+    },
+    "license": "MIT",
+    "devDependencies": {
+        "@babel/core": "^7.11.6",
+        "@babel/node": "^7.10.5",
+        "@babel/preset-env": "^7.11.5",
+        "babel-eslint": "^10.1.0",
+        "eslint": "^7.10.0",
+        "eslint-plugin-prettier": "^3.1.4",
+        "parcel-bundler": "^1.12.4",
+        "prettier": "^2.1.2"
+    },
+    "dependencies": {
+        "express": "^4.17.1"
+    }
 }

@@ -1,0 +1,29 @@
+{
+    "root": true,
+    "parser": "babel-eslint",
+    "plugins": ["prettier"],
+    "rules": {
+        "camelcase": [
+            "error",
+            {
+                "properties": "always"
+            }
+        ],
+        "no-unused-vars": [
+            "error",
+            {
+                "argsIgnorePattern": "^_"
+            }
+        ],
+        "arrow-parens": ["error", "as-needed"],
+        "array-element-newline": [
+            "error",
+            {
+                "ArrayExpression": "consistent",
+                "ArrayPattern": {
+                    "minItems": null
+                }
+            }
+        ]
+    }
+}
