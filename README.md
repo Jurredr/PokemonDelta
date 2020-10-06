@@ -3,14 +3,20 @@ To install dependencies:
 ```bash
 yarn
 ```
+
 To install only production dependencies:
 ```bash
 yarn --prod
 ```
+
 To build and run:
 ```bash
-yarn run public:build
-yarn run server:start
+yarn start
+```
+
+To watch the code for changes and rerun:
+```bash
+yarn run watch
 ```
 
 # TODO
