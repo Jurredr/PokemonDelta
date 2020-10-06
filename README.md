@@ -1,11 +1,17 @@
 # Usage
+To install dependencies:
+```bash
+yarn
+```
+To install only production dependencies:
+```bash
+yarn --prod
+```
 To build and run:
 ```bash
-npm run public:build
-npm run server:start
+yarn run public:build
+yarn run server:start
 ```
 
 # TODO
-- Add prettier
-- Add eslint
-- Add a npm command to watch server and public at the same time
+See Delta's [Trello Board](https://trello.com/b/tKIAj0JR)
