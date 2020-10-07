@@ -1,4 +1,4 @@
-name: Deploy
+name: Deploy dev
 on:
     push:
         branches: dev
@@ -9,20 +9,34 @@ on:
             - 'package.json'
             - 'yarn.lock'
             - 'config.json'
+
 jobs:
-    Deploy:
+    Build&Deploy:
         runs-on: 'ubuntu-latest'
         steps:
-            - name: Deploying...
-              uses: appleboy/ssh-action@master
-              with:
-                  host: ${{ secrets.SSHHOST }}
-                  username: ${{ secrets.SSHUSERNAME }}
-                  password: ${{ secrets.SSHPASSWORD }}
-                  script: |
-                      cd /home/delta/dev
-                      git reset --hard
-                      git pull
-                      yarn --production
-                      yarn run public:build
-                      pm2 reload /home/delta/ecosystem.config.js --only dev
+            -   uses: actions/checkout@v2
+            -   name: Install Node.js
+                uses: actions/setup-node@v1
+                with:
+                    node-version: '12.x'
+            -   name: Install dependencies
+                run: yarn --prod
+            -   name: Build
+                run: yarn run build
+            -   name: Deploy to Server
+                uses: easingthemes/ssh-deploy@v2.1.5
+                env:
+                    SSH_PRIVATE_KEY: ${{ secrets.SERVER_SSH_KEY }}
+                    REMOTE_HOST: ${{ secrets.SSHHOST }}
+                    REMOTE_USER: ${{ secrets.SSHUSERNAME }}
+                    ARGS: "-rltgoDzvO --delete"
+                    SOURCE: "dist/"
+                    TARGET: '/home/delta/dev'
+            -   name: Restart Process
+                uses: appleboy/ssh-action@master
+                with:
+                    host: ${{ secrets.SSHHOST }}
+                    username: ${{ secrets.SSHUSERNAME }}
+                    password: ${{ secrets.SSHPASSWORD }}
+                    script: |
+                        pm2 reload /home/delta/ecosystem.config.js --only dev
