@@ -2,7 +2,7 @@ import Tileset from './graphics/Tileset';
 
 import res from 'res/**/*.*';
 
-import {ctx, addToDraw, frame, canvas} from './graphics/Screen'
+import {ctx, addToDraw, removeToDraw, layerOrder  ,frame, canvas} from './graphics/Screen'
 
 import input from './other/input'
 
@@ -17,24 +17,30 @@ function startSound(){
 
 class Player{
     x;y;
-    targetX;targetY;
+    speed=0.1;
     constructor(x, y){
         this.x = x; this.y = y;
         this.targetX = x; this.targetY = y;
+        addToDraw(()=>this.input(), layerOrder.input);
+        addToDraw(()=>this.draw(), layerOrder.sprites);
+    }
+    destructor(){
+        removeToDraw()
     }
     input(){
-        if (input.key('a')) { x-= frame.dt * vy; }
-        if (input.key('d')) { x+= frame.dt * vy; }
-        if (input.key('w')) { y-= frame.dt * vy; }
-        if (input.key('s')) { y+= frame.dt * vy; }
+        if (input.key('a')) { this.x -= this.speed*frame.dt; }
+        if (input.key('d')) { this.x += this.speed*frame.dt; }
+        if (input.key('w')) { this.y -= this.speed*frame.dt; }
+        if (input.key('s')) { this.y += this.speed*frame.dt; }
     }
     draw(){
-        ctx.fillRect(x,y,100, 100);
+        ctx.fillRect(0,0,100,100);
+        outside.drawTile(this.x,this.y, 2, 2);
     }
 }
+const player = new Player(0, 0);
 
-
-addToDraw(drawBackground);
+addToDraw(drawBackground, layerOrder.background);
 function drawBackground(){
     for (let y = 0; y < 20; y++){
         for (let x = 0; x < 10; x++){

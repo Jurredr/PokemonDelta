@@ -22,9 +22,9 @@ export { canvas, ctx, frame, layerOrder, addToDraw, removeToDraw };
 
 const layerOrder = {
     input:0,
-    background: 10,
+    background: 1,
     sprites: 100,
-    foreground: 200,
+    foreground: 10,
     clearInput: 300,
 };
 
@@ -60,7 +60,6 @@ const frame = {
     },
 };
 function draw(t) {
-    requestAnimationFrame(draw);
     frame.dt = t - frame.t;
     frame.t = t;
     ctx.clearRect(0, 0, canvas.width, canvas.height);
@@ -70,5 +69,6 @@ function draw(t) {
             drawFunc();
         }
     }
+    requestAnimationFrame(draw);
 }
 requestAnimationFrame(draw);
