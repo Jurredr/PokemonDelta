@@ -1,30 +1,23 @@
-import {ctx} from './Screen';
+import Screen from './Screen';
 
 export default class Tileset {
-    isDone = false
     constructor(file, tileWidth, tileHeight) {
-        /** @type {HTMLImageElement} */
-        this.image = document.createElement("img");
-        this.image.onload = () => { this.isDone = true; }
-        this.image.src = file;
-        
-        
+        this.image = Screen.sketch.loadImage(file);
         this.tileWidth = tileWidth;
         this.tileHeight = tileHeight;
     }
 
     drawTile(x, y, tx, ty) {
-        if (this.isdone)return;
-        ctx.drawImage(
-                this.image,
-                tx * this.tileWidth,
-                ty * this.tileHeight,
-                this.tileWidth,
-                this.tileHeight,
-                x,
-                y,
-                this.tileWidth,
-                this.tileHeight
-            );
+        Screen.sketch.image(
+            this.image,
+            x,
+            y,
+            this.tileWidth,
+            this.tileHeight,
+            tx * this.tileWidth,
+            ty * this.tileHeight,
+            this.tileWidth,
+            this.tileHeight
+        );
     }
 }
