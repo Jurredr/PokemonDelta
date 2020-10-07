@@ -21,7 +21,10 @@ const p5Instance = new p5((sketch) => {
         world = new World('test', tileProvider);
 
         const playerTileset = new Tileset(res.img.boy_run.png, 32, 48);
-        world.entities.push(new Player(world, playerTileset));
+        const player = new Player(world, playerTileset);
+        world.entities.push(player);
+
+        world.camera.follow = player;
     };
 
     sketch.draw = () => {

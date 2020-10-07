@@ -36,7 +36,7 @@ export default class TempTileProvider {
             return this.map[layer][x][y];
         }
 
-        return layer == 0 ? 1 : 0;
+        return 0;
     }
 
     isSolid(x, y) {

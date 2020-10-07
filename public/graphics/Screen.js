@@ -11,7 +11,7 @@ const Screen = {
     },
 
     draw() {
-        Screen.sketch.background(255, 0, 0);
+        Screen.sketch.background(0);
     },
 
     scaledWidth() {

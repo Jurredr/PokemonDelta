@@ -11,7 +11,7 @@ export default class Animator {
         this.fps = fps;
     }
 
-    draw() {
+    draw(cx, cy) {
         if (this.running) {
             this.frameCount += Screen.sketch.deltaTime;
             if (this.frameCount >= 1000 / this.fps) {
@@ -23,8 +23,8 @@ export default class Animator {
         }
 
         this.tileset.drawTile(
-            this.position.x * 32 + this.position.imgOffsetX,
-            this.position.y * 32 + this.position.imgOffsetY,
+            this.position.x * 32 + this.position.imgOffsetX - cx,
+            this.position.y * 32 + this.position.imgOffsetY - cy,
             this.x,
             this.y
         );
