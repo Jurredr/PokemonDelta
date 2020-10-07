@@ -2,7 +2,10 @@ import Screen from './Screen';
 
 export default class Tileset {
     constructor(file, tileWidth, tileHeight) {
-        this.image = Screen.sketch.loadImage(file);
+        this.image = Screen.sketch.loadImage(file, () => {
+            this.width = this.image.width / tileWidth;
+            this.height = this.image.height / tileHeight;
+        });
         this.tileWidth = tileWidth;
         this.tileHeight = tileHeight;
     }

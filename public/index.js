@@ -2,24 +2,28 @@ import p5 from 'p5';
 
 import Screen from './graphics/Screen';
 import Tileset from './graphics/Tileset';
+import World from './world/World';
+import TempTileProvider from './world/TempTileProvider';
 
 import res from 'res/**/*.*';
 
-var outside;
-
 const p5Instance = new p5((sketch) => {
+    var world;
+
     sketch.setup = () => {
         Screen.init(sketch);
-
         window.onresize();
 
-        outside = new Tileset(res.img.outside.png, 32, 32);
+        const tileProvider = new TempTileProvider(
+            new Tileset(res.img.outside.png, 32, 32)
+        );
+        world = new World('test', tileProvider);
     };
 
     sketch.draw = () => {
         Screen.draw();
 
-        outside.drawTile(10, 10, 1, 0);
+        world.draw();
     };
 });
 
