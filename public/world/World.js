@@ -28,8 +28,6 @@ export default class World {
                 16;
         }
 
-        console.log(this.camera);
-
         this.entities.forEach((entity) => {
             entity.update(delta);
         });

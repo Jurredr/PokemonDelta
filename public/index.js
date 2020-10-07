@@ -9,7 +9,7 @@ import Player from './world/entity/Player';
 import res from 'res/**/*.*';
 
 const p5Instance = new p5((sketch) => {
-    var world;
+    let world;
 
     sketch.setup = () => {
         Screen.init(sketch);

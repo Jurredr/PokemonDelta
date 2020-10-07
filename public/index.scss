@@ -3,3 +3,12 @@ body {
     margin: 0;
     padding: 0;
 }
+
+canvas {
+    // Use nearest neighbor for pixels in the canvas
+    image-rendering: pixelated;
+    // The width/height of the canvas from p5 is dynamically created, meaning that it gets applied at element level
+    // This can only be overwritten by using the !important override
+    width: 100vw !important;
+    height: 100vh !important;
+}
