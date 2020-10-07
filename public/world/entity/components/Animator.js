@@ -12,12 +12,14 @@ export default class Animator {
     }
 
     draw() {
-        this.frameCount += Screen.sketch.deltaTime;
-        if (this.frameCount >= 1000 / this.fps) {
-            this.frameCount -= 1000 / this.fps;
+        if (this.running) {
+            this.frameCount += Screen.sketch.deltaTime;
+            if (this.frameCount >= 1000 / this.fps) {
+                this.frameCount -= 1000 / this.fps;
 
-            this.x += 1;
-            if (this.x >= this.tileset.width) this.x = 0;
+                this.x += 1;
+                if (this.x >= this.tileset.width) this.x = 0;
+            }
         }
 
         this.tileset.drawTile(

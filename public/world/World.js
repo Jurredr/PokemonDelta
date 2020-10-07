@@ -5,6 +5,12 @@ export default class World {
         this.entities = [];
     }
 
+    update(delta) {
+        this.entities.forEach((entity) => {
+            entity.update(delta);
+        });
+    }
+
     draw() {
         const tilesX = window.innerWidth / this.tileProvider.tileWidth + 1;
         const tilesY = window.innerHeight / this.tileProvider.tileHeight + 1;

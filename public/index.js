@@ -25,8 +25,10 @@ const p5Instance = new p5((sketch) => {
     };
 
     sketch.draw = () => {
-        Screen.draw();
+        const delta = sketch.deltaTime;
+        world.update(delta);
 
+        Screen.draw();
         world.draw();
     };
 });

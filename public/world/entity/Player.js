@@ -1,5 +1,7 @@
 import Position from './components/Position';
 import Animator from './components/Animator';
+import UserMovement from './components/UserMovement';
+import Movement from './components/Movement';
 
 export default class Player {
     constructor(world, tileset) {
@@ -9,6 +11,14 @@ export default class Player {
         this.position.imgOffsetY = -16;
 
         this.animator = new Animator(this.position, tileset, 0, 5);
+
+        this.movement = new Movement(this.animator, this.position);
+        this.userMovement = new UserMovement(this.movement);
+    }
+
+    update(delta) {
+        this.movement.update(delta);
+        this.userMovement.update(delta);
     }
 
     draw() {
