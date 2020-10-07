@@ -14,7 +14,7 @@ export default class Tileset {
     }
 
     drawTile(x, y, tx, ty) {
-        if (this.isdone)return;
+        // if (this.isDone)return;
         ctx.drawImage(
                 this.image,
                 tx * this.tileWidth,
