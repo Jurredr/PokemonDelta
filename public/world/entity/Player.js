@@ -10,7 +10,7 @@ export default class Player {
         this.position = new Position(4, 2);
         this.position.imgOffsetY = -16;
 
-        this.animator = new Animator(this.position, tileset, 0, 5);
+        this.animator = new Animator(this.position, tileset, 0, 8);
 
         this.movement = new Movement(this.animator, this.position);
         this.userMovement = new UserMovement(this.movement);

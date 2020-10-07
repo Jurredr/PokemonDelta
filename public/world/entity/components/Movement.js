@@ -3,7 +3,7 @@ export default class Movement {
         this.animator = animator;
         this.animator.running = false;
         this.position = position;
-        this.speed = 96;
+        this.speed = 128;
         this.targetImgOffsetX = position.imgOffsetX;
         this.targetImgOffsetY = position.imgOffsetY;
         this.moving = false;
