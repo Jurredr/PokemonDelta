@@ -1,0 +1,28 @@
+name: Deploy
+on:
+    push:
+        branches: dev
+        paths:
+            - 'server/**/*'
+            - 'public/**/*'
+            - '**.js'
+            - 'package.json'
+            - 'yarn.lock'
+            - 'config.json'
+jobs:
+    Deploy:
+        runs-on: 'ubuntu-latest'
+        steps:
+            - name: Deploying...
+              uses: appleboy/ssh-action@master
+              with:
+                  host: ${{ secrets.SSHHOST }}
+                  username: ${{ secrets.SSHUSERNAME }}
+                  password: ${{ secrets.SSHPASSWORD }}
+                  script: |
+                      cd /home/delta/dev
+                      git reset --hard
+                      git pull
+                      yarn --production
+                      yarn run public:build
+                      pm2 reload /home/delta/ecosystem.config.js --only dev

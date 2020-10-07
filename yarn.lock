@@ -1248,6 +1248,11 @@ babel-eslint@^10.1.0:
     eslint-visitor-keys "^1.0.0"
     resolve "^1.12.0"
 
+babel-node@^0.0.1-security:
+  version "0.0.1-security"
+  resolved "https://registry.yarnpkg.com/babel-node/-/babel-node-0.0.1-security.tgz#cbff6d9e7a2acb4065c1839c234d5c57091d7217"
+  integrity sha512-zF3D9H2FA2xrP+B/X462G+38aHpmR+33jBF7NowfPuV4CiPEzAR1Typ1RC+qPfe0vCeWeV0FLG2pfVGb0vIfeg==
+
 babel-plugin-dynamic-import-node@^2.3.3:
   version "2.3.3"
   resolved "https://registry.yarnpkg.com/babel-plugin-dynamic-import-node/-/babel-plugin-dynamic-import-node-2.3.3.tgz#84fda19c976ec5c6defef57f9427b3def66e17a3"
@@ -4224,11 +4229,6 @@ node-addon-api@^1.7.1:
   version "1.7.2"
   resolved "https://registry.yarnpkg.com/node-addon-api/-/node-addon-api-1.7.2.tgz#3df30b95720b53c24e59948b49532b662444f54d"
   integrity sha512-ibPK3iA+vaY1eEjESkQkM0BbCqFOaZMiXRTtdB0u7b4djtY6JnsjvPdUHVMg6xQt3B8fpTTWHI9A+ADjM9frzg==
-
-node-core-lib@^0.11.11:
-  version "0.11.11"
-  resolved "https://registry.yarnpkg.com/node-core-lib/-/node-core-lib-0.11.11.tgz#05e1342f70a10821876401017d9ca23febd66571"
-  integrity sha1-BeE0L3ChCCGHZAEBfZyiP+vWZXE=
 
 node-environment-flags@^1.0.5:
   version "1.0.6"
