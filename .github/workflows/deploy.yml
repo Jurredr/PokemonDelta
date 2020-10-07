@@ -11,32 +11,51 @@ on: [push]
 #            - 'config.json'
 
 jobs:
-    Build-Deploy:
+    Deploy:
         runs-on: 'ubuntu-latest'
         steps:
-            -   uses: actions/checkout@v2
-            -   name: Install Node.js
-                uses: actions/setup-node@v1
-                with:
-                    node-version: '12.x'
-            -   name: Install dependencies
-                run: yarn
-            -   name: Build
-                run: yarn run build
-            -   name: Deploy to Server
-                uses: easingthemes/ssh-deploy@v2.1.5
-                env:
-                    SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
-                    REMOTE_HOST: ${{ secrets.SSHHOST }}
-                    REMOTE_USER: ${{ secrets.SSHUSERNAME }}
-                    ARGS: "-rltgoDzvO --delete"
-                    SOURCE: "dist/"
-                    TARGET: '/home/delta/dev'
-            -   name: Restart Process
+            -   name: Deploying...
                 uses: appleboy/ssh-action@master
                 with:
                     host: ${{ secrets.SSHHOST }}
                     username: ${{ secrets.SSHUSERNAME }}
                     password: ${{ secrets.SSHPASSWORD }}
                     script: |
+                        cd /home/delta/dev
+                        git reset --hard
+                        git pull
+                        yarn
+                        yarn run public:build
                         pm2 reload /home/delta/ecosystem.config.js --only dev
+
+#    Build in github action, transfer `dist` to server. 'Permission denied (publickey,password)'
+#    Also needs to 'git pull' in order to update production packages.
+#    Build-Deploy:
+#        runs-on: 'ubuntu-latest'
+#        steps:
+#            -   uses: actions/checkout@v2
+#            -   name: Install Node.js
+#                uses: actions/setup-node@v1
+#                with:
+#                    node-version: '12.x'
+#            -   name: Install dependencies
+#                run: yarn
+#            -   name: Build
+#                run: yarn run build
+#            -   name: Deploy to Server
+#                uses: easingthemes/ssh-deploy@v2.1.5
+#                env:
+#                    SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+#                    REMOTE_HOST: ${{ secrets.SSHHOST }}
+#                    REMOTE_USER: ${{ secrets.SSHUSERNAME }}
+#                    ARGS: "-rltgoDzvO --delete"
+#                    SOURCE: "dist/"
+#                    TARGET: '/home/delta/dev'
+#            -   name: Restart Process
+#                uses: appleboy/ssh-action@master
+#                with:
+#                    host: ${{ secrets.SSHHOST }}
+#                    username: ${{ secrets.SSHUSERNAME }}
+#                    password: ${{ secrets.SSHPASSWORD }}
+#                    script: |
+#                        pm2 reload /home/delta/ecosystem.config.js --only dev
