@@ -55,10 +55,10 @@ export default class TempTileProvider {
 
             if (tile == 0) continue;
 
-            const tile_x = tile % this.tileset.width;
-            const tile_y = Math.floor(tile / this.tileset.width);
+            const tileX = tile % this.tileset.width;
+            const tileY = Math.floor(tile / this.tileset.width);
 
-            this.tileset.drawTile(x, y, tile_x, tile_y);
+            this.tileset.drawTile(x, y, tileX, tileY);
         }
 
         if (this.isSolid(tx, ty)) {

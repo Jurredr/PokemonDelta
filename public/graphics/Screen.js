@@ -1,9 +1,7 @@
-var canvas;
-
 const Screen = {
     init(sketch) {
         Screen.sketch = sketch;
-        canvas = sketch.createCanvas(200, 200);
+        sketch.createCanvas(200, 200);
         sketch.pixelDensity(1);
     },
 

@@ -21,9 +21,9 @@ export default class UserMovement {
         }
 
         if (this.keysDown.length > 0) {
-            const last_key = this.keysDown[this.keysDown.length - 1];
+            const lastKey = this.keysDown[this.keysDown.length - 1];
 
-            switch (last_key) {
+            switch (lastKey) {
                 case 'W':
                     this.movement.move(0, -1);
                     break;
