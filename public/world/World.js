@@ -2,6 +2,7 @@ export default class World {
     constructor(name, tileProvider) {
         this.name = name;
         this.tileProvider = tileProvider;
+        this.entities = [];
     }
 
     draw() {
@@ -18,5 +19,9 @@ export default class World {
                 );
             }
         }
+
+        this.entities.forEach((entity) => {
+            entity.draw();
+        });
     }
 }

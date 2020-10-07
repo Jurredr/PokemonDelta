@@ -4,6 +4,7 @@ import Screen from './graphics/Screen';
 import Tileset from './graphics/Tileset';
 import World from './world/World';
 import TempTileProvider from './world/TempTileProvider';
+import Player from './world/entity/Player';
 
 import res from 'res/**/*.*';
 
@@ -18,6 +19,9 @@ const p5Instance = new p5((sketch) => {
             new Tileset(res.img.outside.png, 32, 32)
         );
         world = new World('test', tileProvider);
+
+        const playerTileset = new Tileset(res.img.boy_run.png, 32, 48);
+        world.entities.push(new Player(world, playerTileset));
     };
 
     sketch.draw = () => {
