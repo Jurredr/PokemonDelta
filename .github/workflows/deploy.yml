@@ -1,14 +1,14 @@
 name: Deploy dev
-on: [push]
-#    push:
-#        branches: dev
-#        paths:
-#            - 'server/**/*'
-#            - 'public/**/*'
-#            - '**.js'
-#            - 'package.json'
-#            - 'yarn.lock'
-#            - 'config.json'
+on:
+    push:
+        branches: dev
+        paths:
+            - 'server/**/*'
+            - 'public/**/*'
+            - '**.js'
+            - 'package.json'
+            - 'yarn.lock'
+            - 'config.json'
 
 jobs:
     Deploy:
@@ -25,7 +25,8 @@ jobs:
                         git reset --hard
                         git pull
                         yarn
-                        yarn run public:build
+                        rm -rfd /home/delta/dev/dist
+                        yarn run build
                         pm2 reload /home/delta/ecosystem.config.js --only dev
 
 #    Build in github action, transfer `dist` to server. 'Permission denied (publickey,password)'
