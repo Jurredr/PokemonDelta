@@ -22,6 +22,9 @@ export default class TempTileProvider {
                 [0, 0, 0, 948, 0],
             ],
         ];
+
+        this.width = this.map[0][0].length;
+        this.height = this.map[0].length;
     }
 
     getTile(layer, x, y) {
@@ -29,12 +32,7 @@ export default class TempTileProvider {
             return 0;
         }
 
-        if (
-            x >= 0 &&
-            x < this.map[layer].length &&
-            y >= 0 &&
-            y < this.map[layer][x].length
-        ) {
+        if (x >= 0 && x < this.width && y >= 0 && y < this.height) {
             return this.map[layer][x][y];
         }
 

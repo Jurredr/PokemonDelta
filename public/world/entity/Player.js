@@ -12,7 +12,7 @@ export default class Player {
 
         this.animator = new Animator(this.position, tileset, 0, 8);
 
-        this.movement = new Movement(this.animator, this.position);
+        this.movement = new Movement(this.world, this.animator, this.position);
         this.userMovement = new UserMovement(this.movement);
     }
 

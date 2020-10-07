@@ -1,5 +1,6 @@
 export default class Movement {
-    constructor(animator, position) {
+    constructor(world, animator, position) {
+        this.world = world;
         this.animator = animator;
         this.animator.running = false;
         this.position = position;
@@ -12,6 +13,26 @@ export default class Movement {
     move(x, y) {
         if (this.moving) return;
 
+        if (y > 0) this.animator.y = 0;
+        if (x < 0) this.animator.y = 1;
+        if (x > 0) this.animator.y = 2;
+        if (y < 0) this.animator.y = 3;
+
+        const tileProvider = this.world.tileProvider;
+
+        const newX = this.position.x + x;
+        const newY = this.position.y + y;
+
+        if (
+            tileProvider.isSolid(newX, newY) ||
+            newX < 0 ||
+            newX >= tileProvider.width ||
+            newY < 0 ||
+            newY >= tileProvider.height
+        ) {
+            return;
+        }
+
         this.position.x += x;
         this.position.y += y;
 
@@ -20,11 +41,6 @@ export default class Movement {
 
         this.moving = true;
         this.animator.running = true;
-
-        if (y > 0) this.animator.y = 0;
-        if (x < 0) this.animator.y = 1;
-        if (x > 0) this.animator.y = 2;
-        if (y < 0) this.animator.y = 3;
     }
 
     update(delta) {

@@ -20,8 +20,6 @@ export default class UserMovement {
             }
         }
 
-        console.log(this.keysDown);
-
         if (this.keysDown.length > 0) {
             const last_key = this.keysDown[this.keysDown.length - 1];
 
