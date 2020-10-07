@@ -1,14 +1,14 @@
 name: Deploy dev
-on:
-    push:
-        branches: dev
-        paths:
-            - 'server/**/*'
-            - 'public/**/*'
-            - '**.js'
-            - 'package.json'
-            - 'yarn.lock'
-            - 'config.json'
+on: [push]
+#    push:
+#        branches: dev
+#        paths:
+#            - 'server/**/*'
+#            - 'public/**/*'
+#            - '**.js'
+#            - 'package.json'
+#            - 'yarn.lock'
+#            - 'config.json'
 
 jobs:
     Build-Deploy:
