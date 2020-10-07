@@ -28,6 +28,8 @@ const p5Instance = new p5((sketch) => {
         const delta = sketch.deltaTime;
         world.update(delta);
 
+        sketch.scale(Screen.zoom);
+
         Screen.draw();
         world.draw();
     };

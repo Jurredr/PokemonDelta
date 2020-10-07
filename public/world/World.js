@@ -1,3 +1,5 @@
+import Screen from '../graphics/Screen';
+
 export default class World {
     constructor(name, tileProvider) {
         this.name = name;
@@ -12,8 +14,8 @@ export default class World {
     }
 
     draw() {
-        const tilesX = window.innerWidth / this.tileProvider.tileWidth + 1;
-        const tilesY = window.innerHeight / this.tileProvider.tileHeight + 1;
+        const tilesX = Screen.scaledWidth() / this.tileProvider.tileWidth + 1;
+        const tilesY = Screen.scaledHeight() / this.tileProvider.tileHeight + 1;
 
         for (var x = 0; x < tilesX; x++) {
             for (var y = 0; y < tilesY; y++) {
