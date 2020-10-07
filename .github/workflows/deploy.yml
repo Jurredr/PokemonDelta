@@ -11,7 +11,7 @@ on:
             - 'config.json'
 
 jobs:
-    Build&Deploy:
+    Build-Deploy:
         runs-on: 'ubuntu-latest'
         steps:
             -   uses: actions/checkout@v2
