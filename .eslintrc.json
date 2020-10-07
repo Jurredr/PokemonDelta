@@ -15,7 +15,7 @@
                 "argsIgnorePattern": "^_"
             }
         ],
-        "arrow-parens": ["error", "as-needed"],
+        "arrow-parens": ["error", "always"],
         "array-element-newline": [
             "error",
             {
