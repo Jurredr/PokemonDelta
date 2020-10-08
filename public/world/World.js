@@ -28,30 +28,24 @@ export default class World {
                 follow.position.imgOffsetY +
                 16;
             Screen.main.updateCamera(this.camera);
-            let cam = Screen.main.camera;
-            document.title = `${cam.offsetX.toFixed(1)}, ${cam.offsetY.toFixed(
-                1
-            )}, `;
         }
     }
 
     draw() {
         const startX =
-            Math.floor(this.camera.x / this.tileProvider.tileWidth) - 1;
+            Math.floor((this.camera.x-Screen.main.camera.scaledWidth()) / this.tileProvider.tileWidth) - 1;
         const startY =
-            Math.floor(this.camera.y / this.tileProvider.tileHeight) - 1;
+            Math.floor((this.camera.y-Screen.main.camera.scaledHeight()) / this.tileProvider.tileHeight) - 1;
         const tilesX =
             Math.floor(
-                Screen.main.camera.scaledWidth() / this.tileProvider.tileWidth
+                2*Screen.main.camera.scaledWidth() / this.tileProvider.tileWidth
             ) + 2;
         const tilesY =
             Math.floor(
-                Screen.main.camera.scaledHeight() / this.tileProvider.tileHeight
-            ) + 3;
-        console.log(Screen.main.camera.scaledHeight());
+                2*Screen.main.camera.scaledHeight() / this.tileProvider.tileHeight
+            ) + 2;
         for (let x = startX; x < startX + tilesX; x++) {
             for (let y = startY; y < startY + tilesY; y++) {
-                // console.log(x * this.tileProvider.tileWidth, y * this.tileProvider.tileWidth)
                 this.tileProvider.drawTile(
                     x * this.tileProvider.tileWidth,
                     y * this.tileProvider.tileHeight,

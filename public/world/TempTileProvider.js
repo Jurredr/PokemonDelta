@@ -1,8 +1,9 @@
 import Screen from '../graphics/Screen';
 
+
 export default class TempTileProvider {
     constructor(tileset) {
-        this.tileset = tileset;
+        this.tileset  = tileset;
         this.tileWidth = tileset.tileWidth;
         this.tileHeight = tileset.tileHeight;
 
@@ -62,13 +63,7 @@ export default class TempTileProvider {
         }
 
         if (this.isSolid(tx, ty)) {
-            Screen.main.strokeRect(
-                x,
-                y,
-                this.tileset.tileWidth,
-                this.tileset.tileHeight,
-                "red"
-            );
+            Screen.main.strokeRect(x+1, y+1, this.tileset.tileWidth-2, this.tileset.tileHeight-2, 'red');
         }
     }
 }

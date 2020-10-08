@@ -23,6 +23,7 @@ const frame = {
     },
 };
 function onVSync(t) {
+    requestAnimationFrame(onVSync); // for more performance
     frame.dt = t - frame.t;
     frame.t = t;
     for (const ordering in loopFuncs) {
@@ -31,7 +32,7 @@ function onVSync(t) {
             drawFunc();
         }
     }
-    requestAnimationFrame(onVSync);
+    // requestAnimationFrame(onVSync); // when debugging
 }
 requestAnimationFrame(onVSync);
 

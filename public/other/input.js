@@ -1,7 +1,7 @@
-import GameLoop from '../other/GameLoop';
+import GameLoop from './GameLoop';
 
 // prettier-ignore
-export default {
+const input = {
     key:          (name) => input.keys       [name],
     keyBefore:    (name) => input.keysBefore [name],
     keydown:      (name) => input.keysDown   [name],
@@ -9,19 +9,13 @@ export default {
     keypress:     (name) => input.keysPressed[name],
     keyTransDown: (name) => this.key(name) && !this.keyBefore(name),
     keyTransUp:   (name) => !this.key(name) && this.keyBefore(name),
-    get keyLastDown() {
-        input.keyLastDown;
-    },
-};
-const input = {
     keys: {},
     keysBefore: {},
     keysDown: {},
     keysUp: {},
-    keysPressed: {},
-    keyLastDown: '',
+    keysPressed: {}
 };
-
+export default input;
 GameLoop.add(nextInput, GameLoop.layerOrder.clearInput);
 
 function nextInput() {
@@ -32,7 +26,7 @@ function nextInput() {
 function clearAll() {
     input.keysDown = {};
     input.keysUp = {};
-    input.keyLastDown = '';
+    input.keysLastDown = [];
 }
 function copy(from, to) {
     for (let i in from) {
@@ -43,7 +37,6 @@ function copy(from, to) {
 window.addEventListener('keydown', (e) => {
     input.keys[e.key] = 1;
     input.keysDown[e.key] = 1;
-    input.keyLastDown = e.key;
 });
 
 window.addEventListener('keyup', (e) => {

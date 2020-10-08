@@ -3,32 +3,28 @@ class Graphics {
         canvas = document.createElement('canvas'),
         parentElementQuery = 'body',
         doResize = true,
+        windowWidth = 600,
+        windowHeight = 400
     }) {
         this.canvas = canvas;
         this.ctx = canvas.getContext('2d');
+        this.ctx.imageSmoothingEnabled = false;
         this.doResize = doResize;
+        this.windowWidth = windowWidth;
+        this.windowHeight = windowHeight;
         if (parentElementQuery) {
             this.setParentElementFromQuery(parentElementQuery);
         }
         const G = this;
         this.camera = {
-            fov: 200,
-            scaledWidth: () =>
-                (G.camera.fov * G.canvas.width) / G.canvas.height,
-            scaledHeight: () => G.camera.fov,
             x: 0,
             y: 0,
-            target: null,
+            follow: null,
+            fov: 200,
+            scaledWidth : () => G.canvas.width,
+            scaledHeight: () => G.canvas.height,
             offsetX: 0,
-            offsetY: 0,
-            set scale(value) {
-                G.ctx.resetTransform();
-                G.ctx.scale(value, value);
-                G.ctx.imageSmoothingEnabled = false;
-            },
-            get scale() {
-                return G.camera.fov / canvas.height;
-            },
+            offsetY: 0
         };
     }
     destructor() {
@@ -37,12 +33,13 @@ class Graphics {
     }
     updateCamera(camera) {
         Object.assign(this.camera, camera);
-        this.camera.scale = this.canvas.height / this.camera.fov;
-        this.camera.offsetX =
-            -this.camera.x +
-            (0.5 * this.camera.fov * this.canvas.width) / this.canvas.height;
-        this.camera.offsetY = -this.camera.y + 0.5 * this.camera.fov;
+        this.canvas.height = this.camera.fov;
+        this.canvas.width = this.camera.fov*this.windowWidth/this.windowHeight;
+        this.camera.offsetX = -this.camera.x + 0.5 * this.canvas.width;
+        this.camera.offsetY = -this.camera.y + 0.5 * this.canvas.height;
     }
+
+
     clear() {
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
     }
@@ -53,7 +50,12 @@ class Graphics {
             this.fillStyle = style;
         }
         const { offsetX, offsetY } = this.camera;
-        this.ctx.fillRect(dx + offsetX, dy + offsetY, dWidth, dHeight);
+        this.ctx.fillRect(
+            Math.trunc(dx + offsetX),
+            Math.trunc(dy + offsetY),
+            Math.trunc(dWidth),
+            Math.trunc(dHeight)
+        );
         if (style !== '') {
             this.fillStyle = lastStyle;
         }
@@ -61,11 +63,15 @@ class Graphics {
     strokeRect(dx, dy, dWidth, dHeight, style = '') {
         let lastStyle;
         if (style !== '') {
-            lastStyle = this.strokeStyle;
-            this.strokeStyle = style;
+            [lastStyle, this.strokeStyle] = [this.strokeStyle, style];
         }
         const { offsetX, offsetY } = this.camera;
-        this.ctx.strokeRect(dx + offsetX, dy + offsetY, dWidth, dHeight);
+        this.ctx.strokeRect(
+            Math.trunc(dx + offsetX),
+            Math.trunc(dy + offsetY),
+            Math.trunc(dWidth),
+            Math.trunc(dHeight)
+        );
         if (style !== '') {
             this.strokeStyle = lastStyle;
         }
@@ -115,8 +121,8 @@ class Graphics {
                 sHeight,
                 Math.trunc(dx + offsetX),
                 Math.trunc(dy + offsetY),
-                Math.ceil(dWidth),
-                Math.ceil(dHeight)
+                dWidth,
+                dHeight
             );
         }
     }
@@ -149,19 +155,18 @@ class Graphics {
         }
         this.doResizeValue = value;
     }
+    get doResize(){return this.doResizeValue;}
 
     thisOnParentResize = () => this.onParentResize();
     onParentResize() {
-        let width, height;
         if (this.parentElement === document.body) {
-            width = window.innerWidth;
-            height = window.innerHeight;
+            this.windowWidth = window.innerWidth;
+            this.windowHeight = window.innerHeight;
         } else {
-            width = this.parentElement.clientWidth;
-            height = this.parentElement.clientHeight;
+            this.windowWidth = this.parentElement.clientWidth;
+            this.windowHeight = this.parentElement.clientHeight;
         }
-        this.canvas.height = this.camera.fov;
-        this.canvas.width = Math.ceil((this.camera.fov * width) / height);
+        this.updateCamera({});
     }
 }
 const Screen = {

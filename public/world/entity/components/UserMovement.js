@@ -1,4 +1,4 @@
-import input from '../../../other/input'
+import input from '../../../other/Input'
 
 export default class UserMovement {
     constructor(movement) {
@@ -7,34 +7,35 @@ export default class UserMovement {
     }
 
     update() {
-        for (const key of ['w', 's', 'a', 'd']) {
-            const i = this.keysDown.indexOf(key);
-            const inArray = i > -1;
+        const newKeysDown = this.currentKey = ['w', 's', 'a', 'd']
+            .filter((k) => input.keydown(k));
+        this.keysDown = this.keysDown.concat(newKeysDown);
 
-            if (input.key(key)) {
-                if (!inArray) {
-                    this.keysDown.push(key);
-                }
-            } else if (inArray) {
-                this.keysDown.splice(i);
-            }
-        }
-        if (this.keysDown.length > 0) {
-            const lastKey = this.keysDown[this.keysDown.length - 1];
+        const newKeys = this.currentKey = ['w', 's', 'a', 'd']
+            .filter((k) => input.key(k));
+
+        if (this.keysDown.length > 0 && this.movement) {
+            let lastKey = this.keysDown[this.keysDown.length-1];
             
-            switch (lastKey) {
-                case 'w':
-                    this.movement.move(0, -1);
-                    break;
-                case 's':
-                    this.movement.move(0, 1);
-                    break;
-                case 'a':
-                    this.movement.move(-1, 0);
-                    break;
-                case 'd':
-                    this.movement.move(1, 0);
-                    break;
+            this.keysDown = [lastKey]
+            if (!input.key(lastKey)){
+                lastKey = newKeys[0];
+            }
+            if (input.key(lastKey)){
+                switch (lastKey) {
+                    case 'w':
+                        this.movement.move(0, -1);
+                        break;
+                    case 's':
+                        this.movement.move(0, 1);
+                        break;
+                    case 'a':
+                        this.movement.move(-1, 0);
+                        break;
+                    case 'd':
+                        this.movement.move(1, 0);
+                        break;
+                }
             }
         }
     }
