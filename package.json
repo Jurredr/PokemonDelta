@@ -3,18 +3,25 @@
     "description": "",
     "version": "1.0.0",
     "repository": "https://github.com/Jurredr/PokemonDelta.git",
+    "license": "MIT",
     "scripts": {
         "lint": "eslint --ignore-path .gitignore .",
         "lint-fix": "eslint --ignore-path .gitignore --ignore-path .eslintignore . --fix",
-        "public:build": "parcel build **/*.html --out-dir dist/public",
-        "public:watch": "parcel watch **/*.html --out-dir dist/public",
+        "public:build": "parcel build public/**/*.html --out-dir dist/public",
+        "public:watch": "parcel watch public/**/*.html --out-dir dist/public",
         "server:build": "babel server -d dist/server",
         "server:watch": "nodemon --exec babel-node server/index.js",
         "watch": "concurrently \"yarn run public:watch\" \"yarn run server:watch\"",
         "build": "yarn run public:build && yarn run server:build",
         "start": "node dist/server/index.js"
     },
-    "license": "MIT",
+    "nodemonConfig": {
+        "ignore": [
+            "dist/",
+            ".git/",
+            ".cache/"
+        ]
+    },
     "devDependencies": {
         "@babel/cli": "^7.11.6",
         "@babel/core": "^7.11.6",

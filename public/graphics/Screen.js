@@ -22,11 +22,11 @@ export class Graphics {
             img,
             Math.floor(dx),
             Math.floor(dy),
-            dWidth,
-            dHeight,
+            dWidth + 0.3,
+            dHeight + 0.2,
             Math.floor(sx) + 0.1,
-            Math.floor(sy) - 0.1,
-            sWidth,
+            Math.floor(sy),
+            sWidth - 0.2,
             sHeight
         );
     }
