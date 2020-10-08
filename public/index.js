@@ -39,5 +39,27 @@ const p5Instance = new p5((sketch) => {
 });
 
 window.onresize = () => {
-    p5Instance.resizeCanvas(window.innerWidth, window.innerHeight);
+    const zoomRatio = window.devicePixelRatio;
+    p5Instance.resizeCanvas(
+        window.innerWidth * zoomRatio,
+        window.innerHeight * zoomRatio
+    );
 };
+
+// Disable zoom using +/-
+document.addEventListener('keydown', (event) => {
+    if (event.ctrlKey && (event.key === '+' || event.key === '-')) {
+        event.preventDefault();
+    }
+});
+
+// Disable zoom using scrollwheel
+window.addEventListener(
+    'wheel',
+    (event) => {
+        if (event.ctrlKey) {
+            event.preventDefault();
+        }
+    },
+    { passive: false }
+);

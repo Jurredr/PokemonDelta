@@ -12,4 +12,6 @@ canvas {
     // This can only be overwritten by using the !important override
     width: 100vw !important;
     height: 100vh !important;
+    // Disable zoom via touch gestures
+    touch-action: manipulation;
 }
