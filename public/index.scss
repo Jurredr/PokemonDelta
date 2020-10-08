@@ -15,3 +15,8 @@ canvas {
     // Disable zoom via touch gestures
     touch-action: manipulation;
 }
+
+p.ie-error {
+    color: red;
+    margin: 20px;
+}

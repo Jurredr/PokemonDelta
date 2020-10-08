@@ -33,7 +33,7 @@ export default class TempTileProvider {
         }
 
         if (x >= 0 && x < this.width && y >= 0 && y < this.height) {
-            return this.map[layer][x][y];
+            return this.map[layer][y][x];
         }
 
         return 0;

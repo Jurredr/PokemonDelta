@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html lang="en">
     <head>
         <meta charset="UTF-8">
@@ -18,4 +19,15 @@
         <script src="index.js"></script>
         <link rel="stylesheet" href="index.scss" />
     </head>
+
+    <body>
+        <script>
+            const ua = window.navigator.userAgent;
+
+            if (ua.indexOf('MSIE ') > 0 || ua.indexOf('Trident/') > 0) {
+                document.body.innerHTML =
+                    '<p class="ie-error">Internet Explorer is not supported by Pokémon Delta. Please use Firefox, Chrome, Safari or another alternative browser.</p>';
+            }
+        </script>
+    </body>
 </html>
