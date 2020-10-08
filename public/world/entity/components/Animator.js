@@ -10,7 +10,7 @@ export default class Animator {
         this.frameCount = 0;
         this.fps = fps;
     }
-    draw(cx, cy) {
+    draw() {
         if (this.running) {
             this.frameCount += GameLoop.frame.dt;
             if (this.frameCount >= 1000 / this.fps) {
@@ -20,10 +20,9 @@ export default class Animator {
                 if (this.x >= this.tileset.width) this.x = 0;
             }
         }
-
         this.tileset.drawTile(
-            this.position.x * 32 + this.position.imgOffsetX - cx,
-            this.position.y * 32 + this.position.imgOffsetY - cy,
+            this.position.x * 32 + this.position.imgOffsetX,
+            this.position.y * 32 + this.position.imgOffsetY,
             this.x,
             this.y
         );

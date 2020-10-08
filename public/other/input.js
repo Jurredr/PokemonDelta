@@ -22,7 +22,7 @@ const input = {
     keyLastDown: '',
 };
 
-GameLoop.add(nextInput, layerOrder);
+GameLoop.add(nextInput, GameLoop.layerOrder.clearInput);
 
 function nextInput() {
     copy(input.keys, input.keysBefore);

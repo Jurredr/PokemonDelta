@@ -1,20 +1,20 @@
-import {main} from './Screen';
+import Screen from './Screen';
 
 export default class Tileset {
     constructor(file, tileWidth, tileHeight) {
         /** @type {HTMLImageElement} */
-        this.image = document.createElement("img");
+        this.image = document.createElement('img');
         this.image.src = file;
-        this.image.onloadedmetadata = () => {
+        this.image.onload = () => {
             this.width = this.image.width / tileWidth;
             this.height = this.image.height / tileHeight;
-        }
+        };
         this.tileWidth = tileWidth;
         this.tileHeight = tileHeight;
     }
 
     drawTile(x, y, tx, ty) {
-        main.image(
+        Screen.main.image(
             this.image,
             x,
             y,

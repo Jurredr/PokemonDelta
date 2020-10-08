@@ -7,7 +7,7 @@ export default class UserMovement {
     }
 
     update() {
-        for (const key of ['W', 'S', 'A', 'D']) {
+        for (const key of ['w', 's', 'a', 'd']) {
             const i = this.keysDown.indexOf(key);
             const inArray = i > -1;
 
@@ -19,21 +19,20 @@ export default class UserMovement {
                 this.keysDown.splice(i);
             }
         }
-
         if (this.keysDown.length > 0) {
             const lastKey = this.keysDown[this.keysDown.length - 1];
-
+            
             switch (lastKey) {
-                case 'W':
+                case 'w':
                     this.movement.move(0, -1);
                     break;
-                case 'S':
+                case 's':
                     this.movement.move(0, 1);
                     break;
-                case 'A':
+                case 'a':
                     this.movement.move(-1, 0);
                     break;
-                case 'D':
+                case 'd':
                     this.movement.move(1, 0);
                     break;
             }

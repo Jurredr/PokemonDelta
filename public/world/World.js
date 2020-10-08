@@ -1,3 +1,4 @@
+import GameLoop from '../other/GameLoop';
 import Screen from '../graphics/Screen';
 export default class World {
     constructor(name, tileProvider) {
@@ -10,8 +11,9 @@ export default class World {
             x: 10,
             y: 0,
         };
-        
-        Screen.addToDraw(()=>this.update(), Screen.layerOrder.background);
+
+        GameLoop.add(() => this.update(), GameLoop.layerOrder.input + 1);
+        GameLoop.add(() => this.draw(), GameLoop.layerOrder.background);
     }
 
     update() {
@@ -25,6 +27,11 @@ export default class World {
                 follow.position.y * this.tileProvider.tileHeight +
                 follow.position.imgOffsetY +
                 16;
+            Screen.main.updateCamera(this.camera);
+            let cam = Screen.main.camera;
+            document.title = `${cam.offsetX.toFixed(1)}, ${cam.offsetY.toFixed(
+                1
+            )}, `;
         }
     }
 
@@ -34,16 +41,20 @@ export default class World {
         const startY =
             Math.floor(this.camera.y / this.tileProvider.tileHeight) - 1;
         const tilesX =
-            Math.floor(Screen.scaledWidth() / this.tileProvider.tileWidth) + 2;
+            Math.floor(
+                Screen.main.camera.scaledWidth() / this.tileProvider.tileWidth
+            ) + 2;
         const tilesY =
-            Math.floor(Screen.scaledHeight() / this.tileProvider.tileHeight) +
-            3;
-
-        for (var x = startX; x < startX + tilesX; x++) {
-            for (var y = startY; y < startY + tilesY; y++) {
+            Math.floor(
+                Screen.main.camera.scaledHeight() / this.tileProvider.tileHeight
+            ) + 3;
+        console.log(Screen.main.camera.scaledHeight());
+        for (let x = startX; x < startX + tilesX; x++) {
+            for (let y = startY; y < startY + tilesY; y++) {
+                // console.log(x * this.tileProvider.tileWidth, y * this.tileProvider.tileWidth)
                 this.tileProvider.drawTile(
-                    x * this.tileProvider.tileWidth - this.camera.x,
-                    y * this.tileProvider.tileHeight - this.camera.y,
+                    x * this.tileProvider.tileWidth,
+                    y * this.tileProvider.tileHeight,
                     x,
                     y
                 );

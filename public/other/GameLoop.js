@@ -1,11 +1,9 @@
-
-
 const layerOrder = {
-    input:0,
-    background: 1,
-    sprites: 100,
-    foreground: 10,
-    clearInput: 300,
+    input: 0,
+    background: 10,
+    sprites: 20,
+    foreground: 30,
+    clearInput: 100,
 };
 
 /** @type {Set[Function]} */
@@ -41,6 +39,6 @@ const GameLoop = {
     add,
     remove,
     frame,
-    layerOrder
-}
+    layerOrder,
+};
 export default GameLoop;

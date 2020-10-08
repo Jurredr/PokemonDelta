@@ -18,17 +18,18 @@ export default class Player {
 
         this.ordering = GameLoop.layerOrder.sprites;
         GameLoop.add(this.thisDraw, this.ordering);
+        GameLoop.add(this.thisUpdate, GameLoop.layerOrder.input);
     }
     destructor(){
         GameLoop.remove(this.thisDraw, this.ordering); 
     }
-
-    update(delta) {
-        this.movement.update(delta);
-        this.userMovement.update(delta);
+    thisUpdate = () => this.update()
+    update() {
+        this.movement.update();
+        this.userMovement.update();
     }
     thisDraw = () => this.draw();
     draw() {
-        this.animator.draw(this.world.camera.x, this.world.camera.y);
+        this.animator.draw();
     }
 }
