@@ -128,6 +128,7 @@ class Graphics {
     }
     set parentElement(element) {
         element.appendChild(this.canvas);
+        element.style.overflowY = "hidden";
         this.onParentResize();
     }
     get parentElement() {

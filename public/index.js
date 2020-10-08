@@ -7,13 +7,13 @@ import TempTileProvider from './world/TempTileProvider';
 import World from './world/World';
 import Player from './world/entity/Player';
 
-import audio from './other/audio';
+import Sound from './other/Sound';
 
-audio.volume = 0.5;
+Sound.volume = 0.5;
 
-audio.load(res.audio.pallet_town.mp3, 1, true, true);
+Sound.load(res.audio.pallet_town.mp3, 1, true, true);
 
-Screen.init(new Screen.Graphics({}));
+Screen.init(new Screen.Graphics({parentElementQuery:"#mainCanvasDiv", canvas:document.createElement("canvas")}));
 
 const outsideTileSet = new Tileset(res.img.outside.png, 32, 32);
 const tileProvider = new TempTileProvider(outsideTileSet);
