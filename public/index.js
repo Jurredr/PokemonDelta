@@ -12,6 +12,8 @@ const p5Instance = new p5((sketch) => {
     let world;
 
     sketch.setup = () => {
+        sketch.frameRate(300);
+
         Screen.init(sketch);
         Screen.zoom *= window.devicePixelRatio;
         window.onresize();
