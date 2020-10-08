@@ -3,17 +3,8 @@ export class Graphics {
         this.sketch = sketch;
     }
 
-    image(img, x, y, width = -1, height = -1) {
-        width = width == -1 ? img.width : width;
-        height = height == -1 ? img.height : height;
-
-        this.sketch.image(
-            img,
-            Math.floor(x),
-            Math.floor(y),
-            width + 0.1,
-            height + 0.1
-        );
+    image(img, x, y, width = img.width, height = img.height) {
+        this.sketch.image(img, Math.floor(x), Math.floor(y), width, height);
     }
 
     image(
@@ -31,11 +22,11 @@ export class Graphics {
             img,
             Math.floor(dx),
             Math.floor(dy),
-            dWidth + 0.1,
-            dHeight + 0.1,
-            Math.floor(sx),
+            dWidth + 0.3,
+            dHeight + 0.2,
+            Math.floor(sx) + 0.1,
             Math.floor(sy),
-            sWidth,
+            sWidth - 0.2,
             sHeight
         );
     }
