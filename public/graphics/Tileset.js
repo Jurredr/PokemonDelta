@@ -11,7 +11,7 @@ export default class Tileset {
     }
 
     drawTile(x, y, tx, ty) {
-        Screen.sketch.image(
+        Screen.graphics.image(
             this.image,
             x,
             y,
