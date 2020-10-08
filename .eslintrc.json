@@ -24,6 +24,7 @@
                     "minItems": null
                 }
             }
-        ]
+        ],
+        "eqeqeq": ["error", "always"]
     }
 }

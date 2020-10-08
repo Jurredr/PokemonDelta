@@ -41,7 +41,7 @@ export default class TempTileProvider {
 
     isSolid(x, y) {
         for (var layer = 0; layer < this.map.length; layer++) {
-            if (this.getTile(layer, x, y) == 948) {
+            if (this.getTile(layer, x, y) === 948) {
                 return true;
             }
         }
@@ -53,7 +53,7 @@ export default class TempTileProvider {
         for (var layer = 0; layer < this.map.length; layer++) {
             const tile = this.getTile(layer, tx, ty);
 
-            if (tile == 0) continue;
+            if (tile === 0) continue;
 
             const tileX = tile % this.tileset.width;
             const tileY = Math.floor(tile / this.tileset.width);
