@@ -1,7 +1,13 @@
 export default {
     set volume(value) {
         data.volume = value;
-        // for 
+        for (const player of players) {
+            if (player.baseVolume != undefined){
+                player.volume = value * player.baseVolume;
+            } else {
+                player.value = value;
+            }
+        }
     },
     get volume() { return data.volume; }
 };

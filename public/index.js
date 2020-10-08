@@ -1,53 +1,70 @@
-import Tileset from './graphics/Tileset';
-
+// import Tileset from './graphics/Tileset';
+import GameLoop from './other/GameLoop';
+import Screen from './graphics/Screen'
 import res from 'res/**/*.*';
 
-import {ctx, addToDraw, removeToDraw, layerOrder  ,frame, canvas} from './graphics/Screen'
+Screen.init(new Screen.Graphics({}));
 
-import input from './other/input'
 
-const musicPlayer = new Audio(res.audio.pallettown.mp3);
+// import {ctx, addToDraw, removeToDraw, layerOrder  ,frame, canvas} from './graphics/Screen'
+// import TempTileProvider from './world/TempTileProvider'
+// import World from './world/World'
+// import Player from './world/entity/Player'
 
-// import {loadSound, playSound} from './audio'
-const outside = new Tileset(res.img.outside.png, 32, 32);
-window.addEventListener("click", startSound);
-function startSound(){
-    musicPlayer.play();
-}
+// import audio from './other/audio'
 
-class Player{
-    x;y;
-    speed=0.1;
-    constructor(x, y){
-        this.x = x; this.y = y;
-        this.targetX = x; this.targetY = y;
-        addToDraw(()=>this.input(), layerOrder.input);
-        addToDraw(()=>this.draw(), layerOrder.sprites);
-    }
-    destructor(){
-        removeToDraw()
-    }
-    input(){
-        if (input.key('a')) { this.x -= this.speed*frame.dt; }
-        if (input.key('d')) { this.x += this.speed*frame.dt; }
-        if (input.key('w')) { this.y -= this.speed*frame.dt; }
-        if (input.key('s')) { this.y += this.speed*frame.dt; }
-    }
-    draw(){
-        ctx.fillRect(0,0,100,100);
-        outside.drawTile(this.x,this.y, 2, 2);
-    }
-}
-const player = new Player(0, 0);
+// const outsideTileSet = new Tileset(res.img.outside.png, 32, 32)
+// const tileProvider = new TempTileProvider(outsideTileSet);
+// const world = new World('test', tileProvider);
+// const playerTileset = new Tileset(res.img.boy_run.png, 32, 48);
+// const player = new Player(world, playerTileset);
+// world.entities.push(player);
 
-addToDraw(drawBackground, layerOrder.background);
+// world.camera.follow = player;
+
+const boy = document.createElement("img")
+boy.src = res.img.boy_run.png
+
+GameLoop.add(drawBackground, GameLoop.layerOrder.background);
+
 function drawBackground(){
-    for (let y = 0; y < 20; y++){
-        for (let x = 0; x < 10; x++){
-            outside.drawTile(x*outside.tileWidth, y*outside.tileHeight, x, y);
-        }
-    }
+    Screen.main.ctx.fillStyle = "white";
+    Screen.main.clear();
+    Screen.main.rect(0,0,100,100);
 }
 
 
 
+// addToDraw(drawBackground, layerOrder.background);
+// function drawBackground(){
+// }
+//     sketch.setup = () => {
+//         Screen.init(sketch);
+//         window.onresize();
+
+//         const tileProvider = new TempTileProvider(
+//             new Tileset(res.img.outside.png, 32, 32)
+//         );
+//         world = new World('test', tileProvider);
+
+//         const playerTileset = new Tileset(res.img.boy_run.png, 32, 48);
+//         const player = new Player(world, playerTileset);
+//         world.entities.push(player);
+
+//         world.camera.follow = player;
+//     };
+
+//     sketch.draw = () => {
+//         const delta = frame.dt;
+//         world.update(delta);
+
+//         sketch.scale(Screen.zoom);
+
+//         Screen.draw();
+//         world.draw();
+//     };
+// });
+
+// window.onresize = () => {
+//     p5Instance.resizeCanvas(window.innerWidth, window.innerHeight);
+// };

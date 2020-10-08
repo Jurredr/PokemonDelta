@@ -1,4 +1,4 @@
-import { addToDraw, layerOrder } from '../graphics/Screen';
+import GameLoop from '../other/GameLoop';
 
 // prettier-ignore
 export default {
@@ -22,7 +22,7 @@ const input = {
     keyLastDown: '',
 };
 
-addToDraw(nextInput, layerOrder.clearInput);
+GameLoop.add(nextInput, layerOrder);
 
 function nextInput() {
     copy(input.keys, input.keysBefore);

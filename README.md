@@ -11,7 +11,7 @@ yarn --prod
 
 To build and run:
 ```bash
-yarn start
+yarn run build && yarn run start
 ```
 
 To watch the code for changes and rerun:

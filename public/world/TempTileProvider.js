@@ -22,6 +22,9 @@ export default class TempTileProvider {
                 [0, 0, 0, 948, 0],
             ],
         ];
+
+        this.width = this.map[0][0].length;
+        this.height = this.map[0].length;
     }
 
     getTile(layer, x, y) {
@@ -29,16 +32,11 @@ export default class TempTileProvider {
             return 0;
         }
 
-        if (
-            x >= 0 &&
-            x < this.map[layer].length &&
-            y >= 0 &&
-            y < this.map[layer][x].length
-        ) {
+        if (x >= 0 && x < this.width && y >= 0 && y < this.height) {
             return this.map[layer][x][y];
         }
 
-        return layer == 0 ? 1 : 0;
+        return 0;
     }
 
     isSolid(x, y) {
@@ -57,20 +55,19 @@ export default class TempTileProvider {
 
             if (tile == 0) continue;
 
-            const tile_x = tile % this.tileset.width;
-            const tile_y = Math.floor(tile / this.tileset.width);
+            const tileX = tile % this.tileset.width;
+            const tileY = Math.floor(tile / this.tileset.width);
 
-            this.tileset.drawTile(x, y, tile_x, tile_y);
+            this.tileset.drawTile(x, y, tileX, tileY);
         }
 
         if (this.isSolid(tx, ty)) {
-            Screen.sketch.noFill();
-            Screen.sketch.stroke(255, 0, 0);
-            Screen.sketch.rect(
+            Screen.main.strokeRect(
                 x,
                 y,
                 this.tileset.tileWidth,
-                this.tileset.tileHeight
+                this.tileset.tileHeight,
+                "red"
             );
         }
     }
