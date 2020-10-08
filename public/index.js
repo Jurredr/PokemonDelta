@@ -13,6 +13,7 @@ const p5Instance = new p5((sketch) => {
 
     sketch.setup = () => {
         Screen.init(sketch);
+        Screen.zoom *= window.devicePixelRatio;
         window.onresize();
 
         const tileProvider = new TempTileProvider(
