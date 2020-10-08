@@ -20,13 +20,13 @@ export class Graphics {
     ) {
         this.sketch.image(
             img,
-            Math.floor(dx),
-            Math.floor(dy),
-            dWidth + 0.3,
-            dHeight + 0.2,
-            Math.floor(sx) + 0.1,
-            Math.floor(sy),
-            sWidth - 0.2,
+            dx,
+            dy,
+            dWidth,
+            dHeight,
+            sx,
+            sy,
+            sWidth,
             sHeight
         );
     }

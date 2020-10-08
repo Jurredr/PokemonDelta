@@ -49,7 +49,7 @@ export default class TempTileProvider {
         return false;
     }
 
-    drawTile(x, y, tx, ty) {
+    drawTile(x, y, tx, ty, target = Screen.graphics) {
         for (var layer = 0; layer < this.map.length; layer++) {
             const tile = this.getTile(layer, tx, ty);
 
@@ -58,18 +58,13 @@ export default class TempTileProvider {
             const tileX = tile % this.tileset.width;
             const tileY = Math.floor(tile / this.tileset.width);
 
-            this.tileset.drawTile(x, y, tileX, tileY);
+            this.tileset.drawTile(x, y, tileX, tileY, target);
         }
 
         if (this.isSolid(tx, ty)) {
-            Screen.sketch.noFill();
-            Screen.sketch.stroke(255, 0, 0);
-            Screen.sketch.rect(
-                x,
-                y,
-                this.tileset.tileWidth,
-                this.tileset.tileHeight
-            );
+            target.noFill();
+            target.stroke(255, 0, 0);
+            target.rect(x, y, this.tileset.tileWidth, this.tileset.tileHeight);
         }
     }
 }

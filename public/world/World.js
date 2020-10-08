@@ -6,11 +6,18 @@ export default class World {
         this.tileProvider = tileProvider;
         this.entities = [];
 
+        this.worldRender = Screen.sketch.createGraphics(
+            tileProvider.width * 32,
+            tileProvider.height * 32
+        );
+
         this.camera = {
             follow: null,
             x: 10,
             y: 0,
         };
+
+        this.drawn = false;
     }
 
     update(delta) {
@@ -34,29 +41,32 @@ export default class World {
     }
 
     draw() {
-        const startX =
-            Math.floor(this.camera.x / this.tileProvider.tileWidth) - 1;
-        const startY =
-            Math.floor(this.camera.y / this.tileProvider.tileHeight) - 1;
-        const tilesX =
-            Math.floor(Screen.scaledWidth() / this.tileProvider.tileWidth) + 2;
-        const tilesY =
-            Math.floor(Screen.scaledHeight() / this.tileProvider.tileHeight) +
-            3;
-
-        for (var x = startX; x < startX + tilesX; x++) {
-            for (var y = startY; y < startY + tilesY; y++) {
-                this.tileProvider.drawTile(
-                    x * this.tileProvider.tileWidth - this.camera.x,
-                    y * this.tileProvider.tileHeight - this.camera.y,
-                    x,
-                    y
-                );
-            }
+        // We really need a way to wait for the textures to be loaded
+        if (!this.drawn && this.tileProvider.tileset.width !== undefined) {
+            this.drawn = true;
+            this.redraw();
         }
+
+        Screen.graphics.image(this.worldRender, -this.camera.x, -this.camera.y);
 
         this.entities.forEach((entity) => {
             entity.draw();
         });
+    }
+
+    redraw() {
+        this.worldRender.background(0);
+
+        for (var x = 0; x < this.tileProvider.width; x++) {
+            for (var y = 0; y < this.tileProvider.height; y++) {
+                this.tileProvider.drawTile(
+                    x * this.tileProvider.tileWidth,
+                    y * this.tileProvider.tileHeight,
+                    x,
+                    y,
+                    this.worldRender
+                );
+            }
+        }
     }
 }

@@ -10,8 +10,8 @@ export default class Tileset {
         this.tileHeight = tileHeight;
     }
 
-    drawTile(x, y, tx, ty) {
-        Screen.graphics.image(
+    drawTile(x, y, tx, ty, target = Screen.graphics) {
+        target.image(
             this.image,
             x,
             y,
