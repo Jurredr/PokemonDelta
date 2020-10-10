@@ -1,4 +1,9 @@
+import p5 from 'p5'
 export class Graphics {
+    /**
+     * 
+     * @param {p5} sketch 
+     */
     constructor(sketch) {
         this.sketch = sketch;
     }
@@ -33,6 +38,12 @@ export class Graphics {
 }
 
 const Screen = {
+    /** @type {p5} */
+    sketch:undefined,
+    /**
+     * 
+     * @param {p5} sketch 
+     */
     init(sketch) {
         Screen.sketch = sketch;
         Screen.graphics = new Graphics(sketch);
