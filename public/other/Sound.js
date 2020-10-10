@@ -13,21 +13,28 @@ const Sound = {
     get volume() {
         return data.volume;
     },
-    canPlay:false,
+    canPlay: false,
     load,
-    addOnCanplay
+    addOnCanplay,
 };
 export default Sound;
 
-
-function load(src, baseVolume=1, doLoop=false, autoPlay=false){
+function load(src, baseVolume = 1, doLoop = false, autoPlay = false) {
     const player = new Audio(src);
-    player.baseVolume = baseVolume
+    player.baseVolume = baseVolume;
+    player.volume = baseVolume * Sound.volume;
     player.loop = doLoop;
     player.autoplay = autoPlay;
-    player.playWhenPossible = ()=>addOnCanplay(()=>player.play());
-    if (autoPlay)player.playWhenPossible();
+    if (autoPlay) playWhenPossible(player);
+    players.push(player);
     return player;
+}
+function playWhenPossible(player) {
+    if (Sound.canPlay) {
+        player.play();
+    } else {
+        addOnCanplay(() => player.play());
+    }
 }
 
 const data = {
@@ -36,21 +43,23 @@ const data = {
 
 const onCanPlayListeners = [];
 
-function addOnCanplay(callback){
-    if (Sound.canPlay === true){
+function addOnCanplay(callback) {
+    if (Sound.canPlay === true) {
         callback();
-    }
-    else {
+    } else {
         onCanPlayListeners.push(callback);
     }
 }
-window.addEventListener('click', oncanplay);
-window.addEventListener('keydown', oncanplay);
-function onCanPlay(){
+const canPlayEvents = ['click', 'keydown'];
+for (const event of canPlayEvents) {
+    window.addEventListener(event, onCanPlay);
+}
+function onCanPlay() {
     Sound.canPlay = true;
-    for (const listener of onCanPlayListeners){
+    for (const listener of onCanPlayListeners) {
         listener();
     }
+    for (const event of canPlayEvents) {
+        window.removeEventListener(event, onCanPlay);
+    }
 }
-
-

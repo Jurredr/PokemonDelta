@@ -11,11 +11,16 @@ import Sound from './other/Sound';
 import Animator from './world/entity/components/Animator';
 import Position from './world/entity/components/Position';
 
-Sound.volume = 0.5;
-
 Sound.load(res.audio.pallet_town.mp3, 1, true, true);
 
-Screen.init(new Screen.Graphics({ parentElementQuery: "#mainCanvasDiv", canvas: document.createElement("canvas") }));
+Sound.volume = 0.5;
+
+Screen.init(
+    new Screen.Graphics({
+        parentElementQuery: '#mainCanvasDiv',
+        canvas: document.createElement('canvas'),
+    })
+);
 
 const outsideTileSet = new Tileset(res.img.outside.png, 32, 32);
 const tileProvider = new TempTileProvider(outsideTileSet);
@@ -37,5 +42,5 @@ function drawBackground() {
     Screen.main.ctx.fillStyle = 'white';
     Screen.main.clear();
     world.draw();
-    bulbaAni.draw()
+    bulbaAni.draw();
 }

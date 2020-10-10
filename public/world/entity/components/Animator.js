@@ -13,7 +13,7 @@ export default class Animator {
     draw() {
         if (this.running) {
             this.frameCount += GameLoop.frame.dt;
-            if (this.frameCount >= 1000 / this.fps) {
+            while (this.frameCount >= 1000 / this.fps) {
                 this.frameCount -= 1000 / this.fps;
 
                 this.x += 1;
