@@ -22,13 +22,18 @@ export default class UserMovement {
         // for the shortest amount of time
         // from the press up till and including now
         let lastKey;
-        const newKeysDown = ["W", "S", "A", "D"]
-            .filter( (k) =>  Screen.sketch.keyIsDown(k.charCodeAt(0)) )
-            .filter( (k) => !this.keysDown.includes(k) );
-        this.keysDown = this.keysDown
-            .filter( (k) => Screen.sketch.keyIsDown(k.charCodeAt(0)) )
-            .concat(newKeysDown);
+        for (const key of ['W', 'S', 'A', 'D']) {
+            const i = this.keysDown.indexOf(key);
+            const inArray = i > -1;
 
+            if (Screen.sketch.keyIsDown(key.charCodeAt(0))) {
+                if (!inArray) {
+                    this.keysDown.push(key);
+                }
+            } else if (inArray) {
+                this.keysDown.splice(i);
+            }
+        }
         if (this.keysDown.length > 0) {
             lastKey = this.keysDown[this.keysDown.length - 1];
         }
