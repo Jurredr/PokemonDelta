@@ -15,22 +15,16 @@ export default class UserMovement {
         // this value will be undefined if it would be the same as the currentKey
         // to prevent double inputs
         this.nextKey;
-
-        // list of all the keys in WSAD that are currently pressed
-        this.keys = []
     }
 
     update() {
-        const keysBefore = this.keys;
-        this.keys = ['W', 'S', 'A', 'D']
-            .filter( (k) => Screen.sketch.keyIsDown(k.charCodeAt(0)) );
-
         // the key that has been held
         // for the shortest amount of time
         // from the press up till and including now
         let lastKey;
-        const newKeysDown = this.keys
-            .filter( (k) => !keysBefore.includes(k) );
+        const newKeysDown = ["W", "S", "A", "D"]
+            .filter( (k) =>  Screen.sketch.keyIsDown(k.charCodeAt(0)) )
+            .filter( (k) => !this.keysDown.includes(k) );
         this.keysDown = this.keysDown
             .filter( (k) => Screen.sketch.keyIsDown(k.charCodeAt(0)) )
             .concat(newKeysDown);
