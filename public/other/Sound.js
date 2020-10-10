@@ -50,7 +50,7 @@ function addOnCanplay(callback) {
         onCanPlayListeners.push(callback);
     }
 }
-const canPlayEvents = ['click', 'keydown'];
+const canPlayEvents = ["click", "keydown"];
 for (const event of canPlayEvents) {
     window.addEventListener(event, onCanPlay);
 }

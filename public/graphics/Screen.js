@@ -1,4 +1,7 @@
 class Graphics {
+    minFov = 100
+    maxFov = 500
+    zoomSensitivity = 0.01
     constructor({
         canvas = document.createElement('canvas'),
         parentElementQuery = 'body',
@@ -31,10 +34,21 @@ class Graphics {
         this.doResize = false;
         this.parentElement.removeChild(canvas);
     }
+    zoom(delta){
+        this.camera.fov =
+            Math.max(
+                this.minFov,
+                Math.min(
+                    this.maxFov,
+                    this.camera.fov *= (1+delta*this.zoomSensitivity)
+                )
+            )
+        this.updateCamera({})
+    }
     updateCamera(camera) {
         Object.assign(this.camera, camera);
-        this.canvas.height = this.camera.fov;
-        this.canvas.width = this.camera.fov*this.windowWidth/this.windowHeight;
+        this.canvas.height = Math.floor(this.camera.fov);
+        this.canvas.width = Math.floor(this.camera.fov)*this.windowWidth/this.windowHeight;
         this.camera.offsetX = -this.camera.x + 0.5 * this.canvas.width;
         this.camera.offsetY = -this.camera.y + 0.5 * this.canvas.height;
     }

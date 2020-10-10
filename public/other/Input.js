@@ -45,3 +45,7 @@ window.addEventListener('keyup', (e) => {
 window.addEventListener('keypress', (e) => {
     Private.keysPressed[e.key.toUpperCase()] = 1;
 });
+window.addEventListener("focusout", ()=>{
+    clearAll();
+    Private.keys = {};
+})
