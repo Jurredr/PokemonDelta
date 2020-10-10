@@ -21,23 +21,24 @@ export default class UserMovement {
         // the key that has been held
         // for the shortest amount of time
         // from the press up till and including now
-        let lastKey
+        let lastKey;
         const newKeysDown = ['W', 'S', 'A', 'D']
             .filter((k) => Input.keyTransDown(k));
         this.keysDown = this.keysDown
             .filter((k) => Input.key(k))
             .concat(newKeysDown);
+
         if (this.keysDown.length > 0) {
-            lastKey = this.keysDown[this.keysDown.length-1];
+            lastKey = this.keysDown[this.keysDown.length - 1];
         }
-    
-        if (this.movement.moving){
-            if (lastKey && lastKey != this.currentKey){
+
+        if (this.movement.moving) {
+            if (lastKey && lastKey !== this.currentKey) {
                 this.nextKey = lastKey;
             }
         } else {
             this.currentKey = undefined;
-            if (this.nextKey){
+            if (this.nextKey) {
                 this.currentKey = this.nextKey;
                 this.nextKey = undefined;
             } else {

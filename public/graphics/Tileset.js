@@ -5,10 +5,10 @@ export default class Tileset {
         /** @type {HTMLImageElement} */
         this.image = document.createElement('img');
         this.image.src = file;
-        this.image.onload = () => {
+        this.image.addEventListener("load", () => {
             this.width = this.image.width / tileWidth;
             this.height = this.image.height / tileHeight;
-        };
+        });
         this.tileWidth = tileWidth;
         this.tileHeight = tileHeight;
     }

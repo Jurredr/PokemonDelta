@@ -8,12 +8,14 @@ import World from './world/World';
 import Player from './world/entity/Player';
 
 import Sound from './other/Sound';
+import Animator from './world/entity/components/Animator';
+import Position from './world/entity/components/Position';
 
 Sound.volume = 0.5;
 
 Sound.load(res.audio.pallet_town.mp3, 1, true, true);
 
-Screen.init(new Screen.Graphics({parentElementQuery:"#mainCanvasDiv", canvas:document.createElement("canvas")}));
+Screen.init(new Screen.Graphics({ parentElementQuery: "#mainCanvasDiv", canvas: document.createElement("canvas") }));
 
 const outsideTileSet = new Tileset(res.img.outside.png, 32, 32);
 const tileProvider = new TempTileProvider(outsideTileSet);
@@ -27,10 +29,13 @@ world.camera.follow = player;
 const boy = document.createElement('img');
 boy.src = res.img.boy_run.png;
 
-GameLoop.add(drawBackground, GameLoop.layerOrder.background);
+const bulbasaur = new Tileset(res.img.pokemon.bulbasaurAni.png, 37, 38);
+const bulbaAni = new Animator(new Position(1, 0), bulbasaur, 0, 12);
 
+GameLoop.add(drawBackground, GameLoop.layerOrder.background);
 function drawBackground() {
     Screen.main.ctx.fillStyle = 'white';
     Screen.main.clear();
     world.draw();
+    bulbaAni.draw()
 }

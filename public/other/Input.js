@@ -1,45 +1,47 @@
 import GameLoop from './GameLoop';
-
 // prettier-ignore
 const Input = {
-    key:          (name) => Input.keys       [name.toUpperCase()],
-    keyBefore:    (name) => Input.keysBefore [name.toUpperCase()],
-    keydown:      (name) => Input.keysDown   [name.toUpperCase()],
-    keyup:        (name) => Input.keysUp     [name.toUpperCase()],
-    keypress:     (name) => Input.keysPressed[name.toUpperCase()],
-    keyTransDown: (name) => Input.key(name) && !Input.keyBefore(name),
-    keyTransUp:   (name) => !Input.key(name) && Input.keyBefore(name),
+    key:          (name) => Private.keys       [name.toUpperCase()],
+    keyBefore:    (name) => Private.keysBefore [name.toUpperCase()],
+    keydown:      (name) => Private.keysDown   [name.toUpperCase()],
+    keyup:        (name) => Private.keysUp     [name.toUpperCase()],
+    keypress:     (name) => Private.keysPressed[name.toUpperCase()],
+    keyTransDown: (name) => Input.key(name)  && !Input.keyBefore(name),
+    keyTransUp:   (name) => !Input.key(name) &&  Input.keyBefore(name),
+};
+export default Input;
+
+const Private = {
     keys: {},
     keysBefore: {},
     keysDown: {},
     keysUp: {},
-    keysPressed: {}
-};
-export default Input;
+    keysPressed: {},
+}
+
 GameLoop.add(nextInput, GameLoop.layerOrder.clearInput);
 
 function nextInput() {
-    Object.assign(Input.keysBefore, Input.keys);
+    Object.assign(Private.keysBefore, Private.keys);
     clearAll();
 }
 
 function clearAll() {
-    Input.keysDown = {};
-    Input.keysUp = {};
-    Input.keysPressed = {};
-    Input.keysLastDown = [];
+    Private.keysDown = {};
+    Private.keysUp = {};
+    Private.keysPressed = {};
 }
 
 window.addEventListener('keydown', (e) => {
-    Input.keys[e.key.toUpperCase()] = 1;
-    Input.keysDown[e.key.toUpperCase()] = 1;
+    Private.keys[e.key.toUpperCase()] = 1;
+    Private.keysDown[e.key.toUpperCase()] = 1;
 });
 
 window.addEventListener('keyup', (e) => {
-    Input.keys[e.key.toUpperCase()] = 0;
-    Input.keysUp[e.key.toUpperCase()] = 1;
+    Private.keys[e.key.toUpperCase()] = 0;
+    Private.keysUp[e.key.toUpperCase()] = 1;
 });
 
 window.addEventListener('keypress', (e) => {
-    Input.keysPressed[e.key.toUpperCase()] = 1;
+    Private.keysPressed[e.key.toUpperCase()] = 1;
 });
