@@ -51,20 +51,20 @@ export default class UserMovement {
             } else {
                 this.currentKey = lastKey;
             }
-            switch (this.currentKey) {
-                case 'W':
-                    this.movement.move(0, -1);
-                    break;
-                case 'S':
-                    this.movement.move(0, 1);
-                    break;
-                case 'A':
-                    this.movement.move(-1, 0);
-                    break;
-                case 'D':
-                    this.movement.move(1, 0);
-                    break;
-            }
+        }
+        switch (this.currentKey) {
+            case 'W':
+                this.movement.move(0, -1);
+                break;
+            case 'S':
+                this.movement.move(0, 1);
+                break;
+            case 'A':
+                this.movement.move(-1, 0);
+                break;
+            case 'D':
+                this.movement.move(1, 0);
+                break;
         }
     }
 }
