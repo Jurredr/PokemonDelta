@@ -25,7 +25,7 @@ export default class Player {
         this.animator.draw(this.world.camera.x, this.world.camera.y);
     }
 
-    step () {
-        console.log(this.position)
+    step() {
+        console.log(this.position);
     }
 }
