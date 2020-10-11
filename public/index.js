@@ -56,7 +56,7 @@ document.addEventListener('keydown', (event) => {
     }
 });
 
-// Disable zoom using scrollwheel
+// Disable zoom using scroll wheel
 window.addEventListener(
     'wheel',
     (event) => {
