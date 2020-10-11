@@ -33,16 +33,16 @@ export default class World {
 
     draw() {
         const startX =
-            Math.floor((this.camera.x-Screen.main.camera.scaledWidth()) / this.tileProvider.tileWidth) - 1;
+            Math.floor((this.camera.x-Screen.main.scaledWidth) / this.tileProvider.tileWidth) - 1;
         const startY =
-            Math.floor((this.camera.y-Screen.main.camera.scaledHeight()) / this.tileProvider.tileHeight) - 1;
+            Math.floor((this.camera.y-Screen.main.scaledHeight) / this.tileProvider.tileHeight) - 1;
         const tilesX =
             Math.floor(
-                2*Screen.main.camera.scaledWidth() / this.tileProvider.tileWidth
+                2*Screen.main.scaledWidth / this.tileProvider.tileWidth
             ) + 2;
         const tilesY =
             Math.floor(
-                2*Screen.main.camera.scaledHeight() / this.tileProvider.tileHeight
+                2*Screen.main.scaledHeight / this.tileProvider.tileHeight
             ) + 2;
         for (let x = startX; x < startX + tilesX; x++) {
             for (let y = startY; y < startY + tilesY; y++) {

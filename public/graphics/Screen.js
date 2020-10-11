@@ -1,49 +1,28 @@
+import Camera from './Camera'
 class Graphics {
-    minFov = 100
-    maxFov = 500
-    zoomSensitivity = 0.01
+    windowWidth = 600
+    windowHeight = 400
     constructor({
         canvas = document.createElement('canvas'),
         parentElementQuery = 'body',
-        doResize = true,
-        windowWidth = 600,
-        windowHeight = 400
+        doResize = true
     }) {
         this.canvas = canvas;
         this.ctx = canvas.getContext('2d');
         this.ctx.imageSmoothingEnabled = false;
         this.doResize = doResize;
-        this.windowWidth = windowWidth;
-        this.windowHeight = windowHeight;
         if (parentElementQuery) {
             this.setParentElementFromQuery(parentElementQuery);
         }
-        const G = this;
-        this.camera = {
-            x: 0,
-            y: 0,
-            follow: null,
-            fov: 200,
-            scaledWidth : () => G.canvas.width,
-            scaledHeight: () => G.canvas.height,
-            offsetX: 0,
-            offsetY: 0
-        };
+        this.camera = new Camera;
     }
     destructor() {
         this.doResize = false;
         this.parentElement.removeChild(canvas);
     }
     zoom(delta){
-        this.camera.fov =
-            Math.max(
-                this.minFov,
-                Math.min(
-                    this.maxFov,
-                    this.camera.fov *= (1+delta*this.zoomSensitivity)
-                )
-            )
-        this.updateCamera({})
+        this.camera.zoom(delta);
+        this.updateCamera();
     }
     updateCamera(camera) {
         Object.assign(this.camera, camera);
@@ -52,7 +31,12 @@ class Graphics {
         this.camera.offsetX = -this.camera.x + 0.5 * this.canvas.width;
         this.camera.offsetY = -this.camera.y + 0.5 * this.canvas.height;
     }
-
+    get scaledWidth(){
+        return this.canvas.width;
+    }
+    get scaledHeight(){
+        return this.canvas.height;
+    }
 
     clear() {
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);

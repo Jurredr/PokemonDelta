@@ -50,11 +50,13 @@ function drawBackground() {
 
 const maxWheelZoomDelta = 7;
 window.addEventListener("wheel", (e)=>{
+    e.preventDefault();
     const delta = Math.min( maxWheelZoomDelta, Math.abs(e.deltaY) ) * Math.sign(e.deltaY);
     Screen.main.zoom(delta);
 });
 const keyZoomDelta = 20;
 window.addEventListener("keydown", (e) => {
+    e.preventDefault();
     if (e.key === "+"){
         Screen.main.zoom(keyZoomDelta);
     } else if (e.key === "-"){
