@@ -1,5 +1,5 @@
-import Screen from '../../../graphics/Screen'
-import Movement from './Movement'
+import Screen from '../../../graphics/Screen';
+import Movement from './Movement';
 
 export default class UserMovement {
     constructor(movement) {
@@ -22,6 +22,7 @@ export default class UserMovement {
         // for the shortest amount of time
         // from the press up till and including now
         let lastKey;
+
         for (const key of ['W', 'S', 'A', 'D']) {
             const i = this.keysDown.indexOf(key);
             const inArray = i > -1;
@@ -34,6 +35,7 @@ export default class UserMovement {
                 this.keysDown.splice(i);
             }
         }
+
         if (this.keysDown.length > 0) {
             lastKey = this.keysDown[this.keysDown.length - 1];
         }
@@ -51,6 +53,7 @@ export default class UserMovement {
                 this.currentKey = lastKey;
             }
         }
+
         switch (this.currentKey) {
             case 'W':
                 this.movement.move(0, -1);

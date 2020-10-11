@@ -1,4 +1,5 @@
 import p5 from 'p5';
+import io from 'socket.io-client';
 
 import Screen from './graphics/Screen';
 import Tileset from './graphics/Tileset';
@@ -7,6 +8,8 @@ import TempTileProvider from './world/TempTileProvider';
 import Player from './world/entity/Player';
 
 import res from 'res/**/*.*';
+
+const socket = io();
 
 const p5Instance = new p5((sketch) => {
     let world;
@@ -28,6 +31,10 @@ const p5Instance = new p5((sketch) => {
         world.entities.push(player);
 
         world.camera.follow = player;
+
+        const npcTileset = new Tileset(res.img.boy_run.png, 32, 48);
+        const npc = new Player(world, npcTileset);
+        world.entities.push(npc);
     };
 
     sketch.draw = () => {
