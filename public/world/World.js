@@ -57,8 +57,8 @@ export default class World {
     redraw() {
         this.worldRender.background(0);
 
-        for (var x = 0; x < this.tileProvider.width; x++) {
-            for (var y = 0; y < this.tileProvider.height; y++) {
+        for (let x = 0; x < this.tileProvider.width; x++) {
+            for (let y = 0; y < this.tileProvider.height; y++) {
                 this.tileProvider.drawTile(
                     x * this.tileProvider.tileWidth,
                     y * this.tileProvider.tileHeight,

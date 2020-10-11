@@ -10,7 +10,7 @@ main {
 
 canvas {
     // Use nearest neighbor for pixels in the canvas
-    image-rendering: pixelated; // Chromium
+    //image-rendering: pixelated; // Chromium
     image-rendering: crisp-edges; // Firefox
     // The width/height of the canvas from p5 is dynamically created, meaning that it gets applied at element level
     // This can only be overwritten by using the !important override
