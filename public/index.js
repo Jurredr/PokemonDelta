@@ -7,9 +7,17 @@ import World from './world/World';
 import TempTileProvider from './world/TempTileProvider';
 import Player from './world/entity/Player';
 
+import PlayerLoginPacket from '../common/packet/PlayerLoginPacket';
+
 import res from 'res/**/*.*';
 
+const name = prompt('Username?');
+
 const socket = io();
+
+// Really not final uuid generation, eventually it will come from the login system
+const uuid = Math.random().toString(36).substring(7);
+socket.emit('player:login', new PlayerLoginPacket(uuid, name));
 
 const p5Instance = new p5((sketch) => {
     let world;
