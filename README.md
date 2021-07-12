@@ -1,3 +1,5 @@
+# Project has been moved to: https://github.com/Jurredr/pokemon-delta
+
 # Usage
 To install dependencies:
 ```bash
